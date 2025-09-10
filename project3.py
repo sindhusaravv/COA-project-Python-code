@@ -3,9 +3,9 @@ from tkinter import ttk, filedialog, messagebox
 import random
 import time
 
-# -------------------------
+
 # Bus Simulator - Full App
-# -------------------------
+
 
 # Global simulator state
 bus_free = True
@@ -26,9 +26,9 @@ root.title("Bus-Based System — Advanced Simulator")
 root.geometry("1100x720")
 root.configure(bg="#111216")
 
-# -------------------------
+
 # Visual Canvas (Main)
-# -------------------------
+
 canvas = tk.Canvas(root, width=1000, height=360, bg="#0f1720", highlightthickness=0)
 canvas.pack(pady=(12,6))
 
@@ -61,9 +61,9 @@ def draw_components():
 
 draw_components()
 
-# -------------------------
+
 # Controls / Left Panel
-# -------------------------
+
 controls_frame = tk.Frame(root, bg="#0b1220")
 controls_frame.pack(fill="x", pady=(6,8))
 
@@ -135,9 +135,9 @@ save_btn.grid(row=0, column=0, padx=6, pady=4)
 reset_btn = tk.Button(misc_frame, text="Reset Stats", width=14, bg="#ef4444", fg="white", command=lambda: reset_stats())
 reset_btn.grid(row=0, column=1, padx=6, pady=4)
 
-# -------------------------
+
 # Right Panel: Queue, Stats, Progress, Log
-# -------------------------
+
 right_frame = tk.Frame(controls_frame, bg="#071127")
 right_frame.grid(row=0, column=1, padx=12, sticky="ne")
 
@@ -180,9 +180,9 @@ def log(msg):
     log_text.insert(tk.END, f"[{timestamp}] {msg}\n")
     log_text.see(tk.END)
 
-# -------------------------
+
 # Simulator Functions
-# -------------------------
+
 def refresh_queue_display():
     queue_listbox.delete(0, tk.END)
     for idx, (who, nid) in enumerate(queue):
@@ -325,9 +325,9 @@ def update_stats(master):
         dma_count += 1
         dma_stat_label.config(text=f"DMA Wins: {dma_count}")
 
-# -------------------------
+
 # Mode / Control Helpers
-# -------------------------
+
 def toggle_mode(new_mode):
     global mode
     mode = new_mode
@@ -366,9 +366,9 @@ def toggle_auto():
         toggle_mode("Manual")
         auto_toggle_btn.config(text="Start Auto", bg="#2dd4bf")
 
-# -------------------------
+
 # Auto Request Generation
-# -------------------------
+
 auto_job_id = None
 def start_auto_requests():
     global auto_job_id
@@ -402,9 +402,7 @@ def stop_auto_requests():
         auto_job_id = None
     log("Auto request generation stopped.")
 
-# -------------------------
-# Pause / Resume
-# -------------------------
+
 def toggle_pause():
     global paused
     paused = not paused
@@ -417,9 +415,9 @@ def toggle_pause():
         # attempt to continue processing
         root.after(80, process_next_request)
 
-# -------------------------
+
 # Save log / Reset stats
-# -------------------------
+
 def save_log():
     txt = log_text.get("1.0", tk.END)
     if not txt.strip():
@@ -443,9 +441,9 @@ def reset_stats():
         refresh_queue_display()
         log("Statistics and queue reset.")
 
-# -------------------------
+
 # Initialize / bind actions
-# -------------------------
+
 def on_close():
     stop_auto_requests()
     root.destroy()
